@@ -1,81 +1,188 @@
-% Transmissão de dados
-% Matheus Pereira dos Santos
-%% Exercício 1
-% Observação do efeito Aliasing
-N = 5000;    % Número de amostras
-fm = 10;    % frequência da mensamgem
+% TransmissÃ£o de dados
+% Matheus Pereira dos Santos RA: 1748823
+
+% ObservaÃ§Ã£o do efeito Aliasing
+
+%% ExercÃ­cio 1
+
+
+N = 5000;    % NÃºmero de amostras
+fm = 10;    % frequÃªncia da mensamgem
 
 %%% fs=200; 
-fs=200;               %frequência de amostragem
-Ts=1/fs;              %período de amostragem
+fs=200;               %frequÃªncia de amostragem
+Ts=1/fs;              %perÃ­odo de amostragem
 t=(0:N-1)*Ts;         %vetor do tempo
 m = cos(2*pi*fm*t);   %sinal de mensagem
 M1= fft(m)/N;
 M= abs(2*M1(1:N/2+1));      %Fourier "one-sided" 
-f=linspace(0,fs/2,N/2+1);   %vetor com frequências em Hz
+f=linspace(0,fs/2,N/2+1);   %vetor com frequÃªncias em Hz
 
 figure
-subplot(1,2,1)
-plot(t,m,'*-')
+subplot(6,1,1)
+plot(t,m,'r--*')
 xlim([0 1])
 grid on
-str1 = ['fs = ' num2str(fs)];   %str1 é um vetor de strings 
+str1 = ['fs = ' num2str(fs) 'Hz'];   %str1 Ã© um vetor de strings 
 ylabel(str1)
-
-subplot(1,2,2)
-fs2x=[fs/2 fs/2];   %vetores para demonstrar fs/2 na figura
-fs2y=[0 max(M)];    %não aparece na primeira figura com fs=200
-plot(f,M,fs2x,fs2y,'r--','LineWidth',2)
-grid on
-xlim([0 20])
 % ---------------------
 %%% fs = 20 Hz
-fs = 20;   % frequência de amostragem
-Ts = 1/fs;  % período de amostragem
+fs = 20;   % frequÃªncia de amostragem
+Ts = 1/fs;  % perÃ­odo de amostragem
 temp = (0:N-1)*Ts;  % vetor do tempo
 m = cos(2*pi*fm*temp);  % sinal de mensagem
 M2 = fft(m)/N;
 M = abs(2*M2(1:N/2+1)); % Fourier "one-sided"
-f1 = linspace(0, fs/2, N/2+1);   % Vetor com frequências em Hz
+f1 = linspace(0, fs/2, N/2+1);   % Vetor com frequÃªncias em Hz
 
-figure
-subplot(1,2,1)
-plot(t, m, 'g')
+subplot(6,1,2)
+plot(temp, m, 'g--*')
 xlim([0 1])
 grid on
-str1 = ['fs = ' num2str(fs) 'Hz'];   %str1 é um vetor de strings
-ylabel(str1)
-
-subplot(1,2,2)
-fs2x = [fs/2 fs/2]; %vetores para demonstrar fs/2 na figura
-fs2y = [0 max(M)];
-plot(f1, M, 'g:', fs2x, fs2y, 'r--', 'LineWidth', 2);
-grid on
-xlim([0 20])
+str2 = ['fs = ' num2str(fs) 'Hz'];   %str1 Ã© um vetor de strings
+ylabel(str2)
 %----------------------
 %%% fs = 15 Hz
-fs = 15;    % frequência de amostragem igual a 15Hz
-Ts = 1/fs;  %período de amostragem para a frequência atual
+fs = 15;    % frequÃªncia de amostragem igual a 15Hz
+Ts = 1/fs;  %perÃ­odo de amostragem para a frequÃªncia atual
 temp = (0: N-1)*Ts;  % vetor de tempo
 m = cos(2*pi*fm*temp);  % sinal de mensagem
-M3 = fft(m)/N; % transformada de fourier rápida
-M = abs(2*M3(1:N/2+1)); % Módulo "one-side"
-f2 = linspace(0, fs/2, N/2+1);   % Vetor com frequências em Hz
+M3 = fft(m)/N; % transformada de fourier rÃ¡pida
+M = abs(2*M3(1:N/2+1)); % MÃ³dulo "one-side"
+f2 = linspace(0, fs/2, N/2+1);   % Vetor com frequÃªncias em Hz
 
-figure
-subplot(1,2,1)
-plot(t, m, '*-')
+subplot(6,1,3)
+plot(temp, m, 'b--*')
 xlim([0 1])
 grid on
-str2 = ['fs = ' num2Str(fs) 'Hz'];  % vetor de strings para legenda
-ylabel(str2);
-
-subplot(1,2,2)
-fs2x = [fs/2 fs/2]; % vetor para fs/2
-fs2y = [0 max(M)];
-plot(f2, M, 'r:', fs2x, fs2y, 'g--', 'LineWidth', 2);
+str3 = ['fs = ' num2str(fs) 'Hz'];  % vetor de strings para legenda
+ylabel(str3);
+%----------------------
+%%% fs = 12Hz
+fs = 12;    % frequÃªncia de amostragem
+Ts = 1/fs;  % novo perÃ­odo de amostragem
+temp = (0: N-1)*Ts;  % novo vetor de tempo
+% sinal de mensagem
+m = cos(2*pi*fm*temp);
+% Transformada rÃ¡pida
+M4 = fft(m)/N;
+M = abs(2*M4(1:N/2+1));
+f3 = linspace(0, fs/2, N/2+1);    % Vetor com frequÃªncias em Hz
+subplot(6,1,4)
+plot(temp, m, 'r--*')
+xlim([0 1])
 grid on
-xlim([0 20])
+str4 = ['fs = ' num2str(fs) 'Hz'];
+ylabel(str4);
+%-----------------------
+%%% fs = 10Hz
+% frequÃªncia de amostragem e perÃ­odo de amostragem
+fs = 10;
+Ts = 1/fs;
+% vetor do tempo
+temp = (0:N-1)*Ts;
+%sinal da mensagem e transformada rÃ¡pida de fourier
+m = cos(2*pi*fm*temp);
+%vetor com frequÃªncia
+f4 = linspace(0, fs/2, N/2+1);
+subplot(6,1,5)
+plot(temp, m, 'g--*')
+xlim([0 1]);
+grid on
+str5 = ['fs = ' num2str(fs) 'Hz'];
+ylabel(str5);
+%-------------------------
+%%% fs = 9Hz
+% frequÃªncia de amostragem e perÃ­odo de amostragem
+fs = 9;
+Ts = 1/fs;
+% vetor de tempo
+temp = (0: N-1)*Ts;
+% sinal de mensagem
+m = cos(2*pi*fm*temp);
+subplot(6,1,6)
+plot(temp, m, 'b--*')
+xlim([0 1]);
+grid on
+str6 = ['fs = ' num2str(fs) 'Hz'];
+ylabel(str6);
 
+xlabel('Tempo');
 
+%% ExercÃ­cio 2
+clear all;
+clc;
+
+load audio; %carregando o aÃºdio
+
+m = m';
+fs = 176400;
+N = length(m);
+
+%%%% (a) K = 18
+%fs2 = fs/18
+k = 18;
+fs2 = fs/k;
+
+m2 = m(1:k :end);
+N = length(m2);
+%%% frequÃªncia fs = 176400
+Ts = 1/fs;
+% vetor de tempo
+temp = (0:N-1)*Ts;
+tst_impar = mod(N, 2);
+    if tst_impar == 1
+        N = N+1;
+    end
+M1 = fft(m)/N;  % transformada rÃ¡pida de fourier
+M = abs(2*M1(1:N/2+1));
+f = linspace(0, fs2/2000, N/2+1);
+
+figure
+subplot(5,2,1)
+plot(temp, m2, 'r');
+xlim([0.4 0.41])
+grid on
+str1 = ['fs = ' num2str(fs2/1000) 'Hz'];
+ylabel(str1);
+subplot(5,2,2)
+fs2x = [fs2/2000 fs2/2000];
+fs2y = [0 max(M)];
+plot(f,M, 'b--*');
+hold on
+plot(fs2x, fs2y, 'r--', 'LineWidth', 2)
+grid on
+xlim([0 6])
+%-------------------------
+%%% k = 35
+
+k = 35;
+fs2 = fs/k;
+
+m2 = m(1: k: end);
+N = length(m2);
+Ts = 1/fs2;
+temp = (0: N-1)*Ts;
+tst_impar = mod(N, 2);
+    if tst_impar == 1
+        N = N+1;
+    end
+M2 = fft(m2)/N;  % transformada rÃ¡pida de fourier
+M = abs(2*M2(1:N/2+1));
+f = linspace(0, fs2/2000, N/2+1);
+subplot(5,2,3)
+plot(temp, m2, 'g--*')
+xlim([0.4 0.41])
+grid on
+str2 = ['fs = ' num2str(fs2/1000) 'Hz'];
+ylabel(str2);
+subplot(5,2,4)
+fs2x = [fs2/2000 fs2/2000];
+fs2y = [0 max(M)];
+plot(f, M, 'g')
+hold on
+plot(fs2x, fs2y, 'g--', 'LineWidth', 2)
+grid on
+xlim([0 6])
+%-------------------------
 
