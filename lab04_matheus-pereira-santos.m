@@ -214,7 +214,7 @@ tst_impar = mod(N, 2);
     end
 M4 = fft(m2)/N;
 M = abs(2*M4(1:N/2+1));
-f = linspace(0, fs2/2000, n/2+1);
+f = linspace(0, fs2/2000, N/2+1);
 subplot(5,2,7);
 plot(temp, m2, 'g');
 xlim([0.4 0.41]);
@@ -270,3 +270,5 @@ xlim([0 6])
 sound(m, fs)
 pause(3)
 sound(m2, fs2)
+
+
